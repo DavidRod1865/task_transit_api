@@ -12,9 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,10 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zo5ke1tq+o+6&bf_%gr_)2m6#&3g!2j8pg6gj1n0!3plv&7qx_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'https://tasktransitapi-35c0a97b3448.herokuapp.com/',
+    'localhost',
 ]
 
 
@@ -53,8 +56,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'white_noise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -86,19 +90,20 @@ env = environ.Env()
 environ.Env.read_env()
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'HOST': 'http://localhost:8000',
-    },
-    'remote': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'db.bjemxupnlfzobmhbwziz.supabase.co',
-        'NAME': env('PG_NAME'),
-        'PORT': env('PG_PORT'),
-        'USER': env('PG_USER'),
-        'PASSWORD': env('PG_PASSWORD'),
-    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    #     'HOST': 'http://localhost:8000',
+    # },
+    # 'remote': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'HOST': 'db.bjemxupnlfzobmhbwziz.supabase.co',
+    #     'NAME': env('PG_NAME'),
+    #     'PORT': env('PG_PORT'),
+    #     'USER': env('PG_USER'),
+    #     'PASSWORD': env('PG_PASSWORD'),
+    # },
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
 # DATABASE_ROUTERS = ['LogisticsTaskManager.models.CustomRouter']
@@ -147,4 +152,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:5173',
+     'http://localhost:8000',
 ]
