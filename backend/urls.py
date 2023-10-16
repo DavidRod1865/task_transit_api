@@ -25,5 +25,5 @@ router.register(r'files', views.LogisticsTaskManagerView, 'file')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/files', include(router.urls)),
 ]
