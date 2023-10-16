@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn tasktransitapi.wsgi
+web: gunicorn backend.wsgi
