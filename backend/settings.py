@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-zo5ke1tq+o+6&bf_%gr_)2m6#&3g!2j8pg6gj1n0!3plv&7qx_
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'tasktransitapi-35c0a97b3448.herokuapp.com',
+    'tasktransitapi-35c0a97b3448.herokuapp.com/api/files',
     'localhost',
 ]
 
