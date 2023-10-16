@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +32,6 @@ ALLOWED_HOSTS = [
     'tasktransitapi-35c0a97b3448.herokuapp.com',
     'localhost',
 ]
-
 
 # Application definition
 
@@ -89,10 +89,11 @@ env = environ.Env()
 environ.Env.read_env()
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../db.sqlite3'),
-    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    #     'HOST': 'http://localhost:8000',
+    # },
     # 'remote': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     #     'HOST': 'db.bjemxupnlfzobmhbwziz.supabase.co',
@@ -101,10 +102,8 @@ DATABASES = {
     #     'USER': env('PG_USER'),
     #     'PASSWORD': env('PG_PASSWORD'),
     # },
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
 
 # DATABASE_ROUTERS = ['LogisticsTaskManager.models.CustomRouter']
 
