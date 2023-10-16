@@ -19,16 +19,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from LogisticsTaskManager import views
-from django.http import HttpResponse
-
-def home(request):
-    return HttpResponse("Hello, World!")
 
 router = routers.DefaultRouter()
 router.register(r'files', views.LogisticsTaskManagerView, 'file')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    path('', home),
+    path('/', include(router.urls)),
 ]
