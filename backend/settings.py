@@ -91,7 +91,7 @@ DATABASES = {
     #     'NAME': BASE_DIR / 'db.sqlite3',
     #     'HOST': 'http://localhost:8000',
     # },
-    'default': dj_database_url.config(default=env('DATABASE_URL'))
+    'default': dj_database_url.config(default=env('DATABASE_URL')).update({'CONN_MAX_AGE': 500}),
 }
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
