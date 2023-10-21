@@ -29,6 +29,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'tasktransitapi-35c0a97b3448.herokuapp.com',
     'localhost',
+    '*',
 ]
 
 # Application definition
@@ -77,13 +78,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 import environ
 env = environ.Env()
-environ.Env.read_env()
+env.read_env()
 
 DATABASES = {
     # 'default': {
@@ -131,13 +131,13 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:5173',
-     'http://localhost:8000',
+    'http://localhost:5173',
+    'http://localhost:8000',
+    'https://task-transit.vercel.app'
 ]
